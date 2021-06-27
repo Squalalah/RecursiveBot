@@ -93,7 +93,6 @@ function findLargerGroup() {
     if($debugMode) echo 'nb de groupe au total : '.count($groupNum).PHP_EOL;
     for($i = 0; $i < (count($groupNum));$i++)
     {
-        $totalTest = 0;
         if($debugMode) echo 'GroupNum testé index '.$i.PHP_EOL;
         if(count($groupNum[$i]) > $total)
         {
