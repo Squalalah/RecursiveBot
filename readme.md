@@ -26,6 +26,7 @@
 + Code allégé
 + Contrôle saisie utilisateur
 + Gestion de l'affichage des groupes identiques.
++ Retourne tout les tableaux ex aequo
 
 ### RecursiveBotV3Web :
 
