@@ -121,20 +121,18 @@ function findLargerGroup() {
     for($i = 0; $i < count($groupNum);$i++)
     {
         if($debugMode) echo 'TEST n°: '. $i.'<br>';
-        if($total == 0 && $index == 0)
+        switch($total <=> count($groupResult[$i]))
         {
-            $total = count($groupResult[$i]);
-            $index = $i;
-        }
-        elseif($total > count($groupResult[$i]))
-        {
-            unset($groupResult[$i]);
-        }
-        elseif($total < count($groupResult[$i]))
-        {
-            unset($groupResult[$index]);
-            $total = count($groupResult[$i]);
-            $index = $i;
+            case -1: {
+                if($total !== 0) unset($groupResult[$index]);
+                $total = count($groupResult[$i]);
+                $index = $i;
+                break;
+            }
+            case 1: {
+                unset($groupResult[$i]);
+                break;
+            }
         }
     }
     $str = 'Résultats : '.'<br>';
