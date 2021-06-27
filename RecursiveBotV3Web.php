@@ -2,13 +2,9 @@
 
 $tableau = array();
 $groupNum = array();
-$width = 5;
 $widthTabIncrement = array();
 $widthTabDecrement = array();
 $MINVALUE = 0;
-$length = 5;
-$debugMode = 1;
-ini_set('memory_limit', '-1');
 
 //groupnum
 /*
@@ -107,7 +103,8 @@ function initTableau() {
 
 function findLargerGroup() {
     global $tableau, $groupNum, $debugMode;
-    $total = $index = 0;
+    $total = 0;
+    $index = array();
     initTableau();
     echo '<br>';
     for($i = 0; $i < count($tableau['value']); $i++)
@@ -121,46 +118,31 @@ function findLargerGroup() {
     for($i = 0; $i < count($groupNum);$i++)
     {
         if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
-        if($total < count($groupNum[$i]))
+        switch($total <=> count($groupNum[$i]))
         {
-            if($total !== 0) unset($groupResult[$index]);
-            unset($groupResult);
-            $groupResult[$i][] = $groupNum[$i];
-            $total = count($groupNum[$i]);
-            $index = $i;
-        }
-        elseif($total == count($groupNum[$i]))
-        {
-            $groupResult[$i][] = $groupNum[$i];
+            case -1: {
+                unset($groupResult);
+                unset($index);
+                $index[] = $i;
+                $groupResult[$i][] = $groupNum[$i];
+                $total = count($groupNum[$i]);
+                break;
+            }
+            case 0: {
+                $groupResult[$i][] = $groupNum[$i];
+                break;
+            }
         }
     }
     $str = 'Résultats : '.PHP_EOL;
     if(count($groupResult) >= 1)
     {
         for($a = 0; $a < count($groupResult); $a++) {
-            $str .= '[Tableau avec '.$total. ' valeurs]'.PHP_EOL;
+            $str .= '[Tableau n°'.($index[$a]+1).' avec '.$total. ' valeurs]'.PHP_EOL;
         }
         echo $str;
     }
     else echo 'Il n\'y a aucun 1, donc aucun tableau';
 }
-/*
-$file = fopen('php://stdin', 'r');
-do {
-    echo 'Veuillez écrire une largeur'. '<br>';
-    $width = trim(fgets($file));
-    echo 'Veuillez écrire une longueur'. '<br>';
-    $length = trim(fgets($file));
-    if(!preg_match('/[0-9]/', $width) || !preg_match('/[0-9]/', $length)) {
-        echo '[ERREUR] Merci d\'entrer une valeur correcte'.'<br>';
-        continue;
-    }
-    break;
-}while(1 != 2);
-$MAXVALUE = $width*$length;
-$time_start = microtime(true);
-findLargerGroup();
-$time_end = microtime(true);
-if($debugMode == 1) echo 'Temps d\'execution : '. ($time_end-$time_start);
-*/
+
 

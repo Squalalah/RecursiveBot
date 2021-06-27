@@ -2,14 +2,10 @@
 
 $tableau = array();
 $groupNum = array();
-$width = 5;
 $widthTabIncrement = array();
 $widthTabDecrement = array();
 $MINVALUE = 0;
-$length = 5;
-$MAXVALUE = $width*$length;
 $debugMode = 1;
-ini_set('memory_limit', '-1');
 
 //groupnum
 /*
@@ -81,7 +77,8 @@ function initTableau() {
 
 function findLargerGroup() {
     global $tableau, $groupNum, $debugMode;
-    $total = $index = 0;
+    $total = 0;
+    $index = array();
     initTableau();
     echo PHP_EOL;
     for($i = 0; $i < count($tableau['value']); $i++)
@@ -95,24 +92,27 @@ function findLargerGroup() {
     for($i = 0; $i < count($groupNum);$i++)
     {
         if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
-        if($total < count($groupNum[$i]))
+        switch($total <=> count($groupNum[$i]))
         {
-            if($total !== 0) unset($groupResult[$index]);
-            unset($groupResult);
-            $groupResult[$i][] = $groupNum[$i];
-            $total = count($groupNum[$i]);
-            $index = $i;
-        }
-        elseif($total == count($groupNum[$i]))
-        {
-            $groupResult[$i][] = $groupNum[$i];
+            case -1: {
+                unset($groupResult);
+                unset($index);
+                $index[] = $i;
+                $groupResult[$i][] = $groupNum[$i];
+                $total = count($groupNum[$i]);
+                break;
+            }
+            case 0: {
+                $groupResult[$i][] = $groupNum[$i];
+                break;
+            }
         }
     }
     $str = 'Résultats : '.PHP_EOL;
     if(count($groupResult) >= 1)
     {
         for($a = 0; $a < count($groupResult); $a++) {
-            $str .= '[Tableau avec '.$total. ' valeurs]'.PHP_EOL;
+            $str .= '[Tableau n°'.($index[$a]+1).' avec '.$total. ' valeurs]'.PHP_EOL;
         }
         echo $str;
     }
