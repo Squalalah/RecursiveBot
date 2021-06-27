@@ -1,9 +1,9 @@
 # Recursive Bot
 
-- Le programme demande (en console PHP) une largeur et longueur de tableau (de 0 à infini).
+- Le programme demande (en console PHP / version Web) une largeur et longueur de tableau (de 0 à infini).
 - Le programme génère des 0 et 1 aléatoirement sur chaque case du tableau
 - Le programme vérifie ensuite chaque case et créer des groupes pour chaque 1 adjacents.
-- Le programme retourne ensuite le tableau le plus gros trouvé en premier.
+- Le programme retourne ensuite le tableau le plus gros trouvé en premier. (retourne tout les tableaux ex aequo en Version 3)
 
 
 <hr>
@@ -26,6 +26,7 @@
 + Code allégé
 + Contrôle saisie utilisateur
 + Gestion de l'affichage des groupes identiques.
++ Retourne tout les tableaux ex aequo
 
 ### RecursiveBotV3Web :
 
