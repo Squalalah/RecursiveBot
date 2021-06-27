@@ -63,26 +63,23 @@ function checkDuplicate($index, $key = null) {
         {
             if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index+$width). 'via la case '.$index.'<br>';
             $numbers = checkDuplicate($index+$width, $key);
-            if($numbers !== null) $groupNum[$key][] = $numbers;
         }
         if(!in_array($index, $widthTabIncrement))
         {
             if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index+1). 'via la case '.$index.'<br>';
             $numbers = checkDuplicate($index+1, $key);
-            if($numbers !== null) $groupNum[$key][] = $numbers;
         }
         if(!in_array($index, $widthTabDecrement))
         {
             if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index-1). 'via la case '.$index.'<br>';
             $numbers = checkDuplicate($index-1, $key);
-            if($numbers !== null) $groupNum[$key][] = $numbers;
         }
         if($index-$width > $MINVALUE)
         {
             if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index-$width). 'via la case '.$index.'<br>';
             $numbers = checkDuplicate($index-$width, $key);
-            if($numbers !== null) $groupNum[$key][] = $numbers;
         }
+        if($numbers !== null) $groupNum[$key][] = $numbers;
     }
     else return null;
     return $numbers;
