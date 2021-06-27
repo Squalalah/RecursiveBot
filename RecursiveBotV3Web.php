@@ -18,11 +18,11 @@ $MINVALUE = 0;
 
 <form method="POST" action="#">
     <label for="width">Largeur : </label>
-    <input type="number" name="width" id="width" min="1"><br>
+    <input type="number" name="width" id="width" min="1" value="5"><br>
     <label for="length">Longueur : </label>
-    <input type="number" name="length" id="length" min="1"><br>
+    <input type="number" name="length" id="length" min="1" value="5"><br>
     <label for="debug">DebugMode : </label>
-    <input type="number" name="debug" id="debug" min="0" max="1"><br>
+    <input type="number" name="debug" id="debug" min="0" max="1" value="1"><br>
     <input type="submit" value="Envoyer">
 </form>
 
@@ -113,11 +113,11 @@ function findLargerGroup() {
         if($debugMode) echo '[findLargerGroup] Je teste la case '. $i.'<br>';
         checkDuplicate($i);
     }
-    if($debugMode) echo 'nb de groupe au total : '.count($groupNum).PHP_EOL;
+    if($debugMode) echo 'nb de groupe au total : '.count($groupNum).'<br>';
     $groupResult = array();
     for($i = 0; $i < count($groupNum);$i++)
     {
-        if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
+        if($debugMode) echo 'TEST n°: '. $i.'<br>';
         switch($total <=> count($groupNum[$i]))
         {
             case -1: {
@@ -129,16 +129,17 @@ function findLargerGroup() {
                 break;
             }
             case 0: {
+                $index[] = $i;
                 $groupResult[$i][] = $groupNum[$i];
                 break;
             }
         }
     }
-    $str = 'Résultats : '.PHP_EOL;
+    $str = 'Résultats : '.'<br>';
     if(count($groupResult) >= 1)
     {
         for($a = 0; $a < count($groupResult); $a++) {
-            $str .= '[Tableau n°'.($index[$a]+1).' avec '.$total. ' valeurs]'.PHP_EOL;
+            $str .= '[Tableau n°'.($index[$a]+1).' avec '.$total. ' valeurs]'.'<br>';
         }
         echo $str;
     }

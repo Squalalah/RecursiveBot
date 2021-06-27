@@ -103,6 +103,7 @@ function findLargerGroup() {
                 break;
             }
             case 0: {
+                $index[] = $i;
                 $groupResult[$i][] = $groupNum[$i];
                 break;
             }
