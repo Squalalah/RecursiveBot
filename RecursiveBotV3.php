@@ -7,48 +7,47 @@ $widthTabDecrement = array();
 $MINVALUE = 0;
 $debugMode = 1;
 
-//groupnum
-/*
- * groupNum[numGroup][numALinterieur];
- *
- */
+function findLargerGroup() : void {
+    global $tableau, $groupNum, $debugMode;
+    initTableau();
+    for($i = 0; $i < count($tableau['value']); $i++)
+    {
+        if($tableau['check'][$i] == true) continue;
+        if($debugMode) echo '[findLargerGroup] Je teste la case '. $i.PHP_EOL;
+        checkDuplicate($i);
+    }
+    showResult($groupNum);
+}
 
-//array(4, 9, 14, 19, 24)
-
-
-function checkDuplicate($index, $key = null) {
+function checkDuplicate($index, $key = null, $parentIndex = null) : ?array {
     global $tableau, $groupNum, $MAXVALUE, $MINVALUE, $width, $widthTabIncrement, $widthTabDecrement, $debugMode;
     $numbers = array();
-    if($debugMode) echo '[checkDuplicate] Je teste la case ' .$index.PHP_EOL;
+    if($debugMode) {
+        if($parentIndex != null) echo '[checkDuplicate] Je teste la case ' .($index). ' via la case '.$parentIndex.PHP_EOL;
+        else echo '[checkDuplicate] Je teste la case ' .$index.PHP_EOL;
+    }
     if($tableau['check'][$index] == true) return null;
     $tableau['check'][$index] = true;
     if($tableau['value'][$index] == 1)
     {
-        if($key === null)
-        {
-            $key = count($groupNum);
-        }
+        if($key === null) $key = count($groupNum);
         if($debugMode) echo '[checkDuplicate] La case '. $index. ' est un 1, je l`\'ajoute au tableau '.$key.PHP_EOL;
         $groupNum[$key][] = $index;
         if($index+$width < $MAXVALUE)
         {
-            if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index+$width). 'via la case '.$index.PHP_EOL;
-            $numbers = checkDuplicate($index+$width, $key);
+            $numbers = checkDuplicate($index+$width, $key, $index);
         }
         if(!in_array($index, $widthTabIncrement))
         {
-            if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index+1). 'via la case '.$index.PHP_EOL;
-            $numbers = checkDuplicate($index+1, $key);
+            $numbers = checkDuplicate($index+1, $key, $index);
         }
         if(!in_array($index, $widthTabDecrement))
         {
-            if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index-1). 'via la case '.$index.PHP_EOL;
-            $numbers = checkDuplicate($index-1, $key);
+            $numbers = checkDuplicate($index-1, $key, $index);
         }
         if($index-$width > $MINVALUE)
         {
-            if($debugMode) echo '[checkDuplicate] Je teste la case ' .($index-$width). 'via la case '.$index.PHP_EOL;
-            $numbers = checkDuplicate($index-$width, $key);
+            $numbers = checkDuplicate($index-$width, $key, $index);
         }
         if($numbers !== null) $groupNum[$key][] = $numbers;
     }
@@ -56,7 +55,7 @@ function checkDuplicate($index, $key = null) {
     return $numbers;
 }
 
-function initTableau() {
+function initTableau() : void {
     global $tableau, $width, $length, $MINVALUE, $MAXVALUE, $widthTabIncrement, $widthTabDecrement;
     for($i = $width-1; $i < $width*$length; $i+=$width)
     {
@@ -73,22 +72,15 @@ function initTableau() {
         if($i % $width == 0) echo PHP_EOL;
         echo $tableau['value'][$i];
     }
+    echo PHP_EOL;
 }
 
-function findLargerGroup() {
-    global $tableau, $groupNum, $debugMode;
+function showResult($groupNum) : void {
+    global $debugMode;
+    $groupResult = array();
     $total = 0;
     $index = array();
-    initTableau();
-    echo PHP_EOL;
-    for($i = 0; $i < count($tableau['value']); $i++)
-    {
-        if($tableau['check'][$i] == true) continue;
-        if($debugMode) echo '[findLargerGroup] Je teste la case '. $i.PHP_EOL;
-        checkDuplicate($i);
-    }
     if($debugMode) echo 'nb de groupe au total : '.count($groupNum).PHP_EOL;
-    $groupResult = array();
     for($i = 0; $i < count($groupNum);$i++)
     {
         if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
