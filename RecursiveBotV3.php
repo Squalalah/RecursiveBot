@@ -95,14 +95,9 @@ function findLargerGroup() {
     {
         $totalTest = 0;
         if($debugMode) echo 'GroupNum testé index '.$i.PHP_EOL;
-        foreach($groupNum[$i] as $value)
+        if(count($groupNum[$i]) > $total)
         {
-            if($debugMode) echo 'GroupNum testé index '.$i.', value = '. $value.PHP_EOL;
-            $totalTest++;
-        }
-        if($totalTest > $total)
-        {
-            $total = $totalTest;
+            $total = count($groupNum[$i]);
             $index = $i;
         }
     }

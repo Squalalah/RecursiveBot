@@ -121,14 +121,9 @@ function findLargerGroup() {
     {
         $totalTest = 0;
         if($debugMode) echo 'GroupNum testé index '.$i.'<br>';
-        foreach($groupNum[$i] as $value)
+        if(count($groupNum[$i]) > $total)
         {
-            if($debugMode) echo 'GroupNum testé index '.$i.', value = '. $value.'<br>';
-            $totalTest++;
-        }
-        if($totalTest > $total)
-        {
-            $total = $totalTest;
+            $total = count($groupNum[$i]);
             $index = $i;
         }
     }
