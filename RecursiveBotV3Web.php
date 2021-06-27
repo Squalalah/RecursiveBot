@@ -116,30 +116,29 @@ function findLargerGroup() {
         if($debugMode) echo '[findLargerGroup] Je teste la case '. $i.'<br>';
         checkDuplicate($i);
     }
-    if($debugMode) echo 'nb de groupe au total : '.count($groupNum).'<br>';
-    $groupResult = $groupNum;
+    if($debugMode) echo 'nb de groupe au total : '.count($groupNum).PHP_EOL;
+    $groupResult = array();
     for($i = 0; $i < count($groupNum);$i++)
     {
-        if($debugMode) echo 'TEST n°: '. $i.'<br>';
-        switch($total <=> count($groupResult[$i]))
+        if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
+        if($total < count($groupNum[$i]))
         {
-            case -1: {
-                if($total !== 0) unset($groupResult[$index]);
-                $total = count($groupResult[$i]);
-                $index = $i;
-                break;
-            }
-            case 1: {
-                unset($groupResult[$i]);
-                break;
-            }
+            if($total !== 0) unset($groupResult[$index]);
+            unset($groupResult);
+            $groupResult[$i][] = $groupNum[$i];
+            $total = count($groupNum[$i]);
+            $index = $i;
+        }
+        elseif($total == count($groupNum[$i]))
+        {
+            $groupResult[$i][] = $groupNum[$i];
         }
     }
-    $str = 'Résultats : '.'<br>';
+    $str = 'Résultats : '.PHP_EOL;
     if(count($groupResult) >= 1)
     {
         for($a = 0; $a < count($groupResult); $a++) {
-            $str .= '[Tableau n°'.($a+1).' avec '.$total. ' valeurs]'.'<br>';
+            $str .= '[Tableau avec '.$total. ' valeurs]'.PHP_EOL;
         }
         echo $str;
     }
