@@ -22,7 +22,7 @@ RecursiveBotV2 :
 
 RecursiveBotV3 :
 
-+ (WIP) alléger le code
-+ (WIP) contrôle saisie utilisateur
++ Code allégé
++ Contrôle saisie utilisateur
 
 
