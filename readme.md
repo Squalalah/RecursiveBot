@@ -25,9 +25,10 @@
 
 + Code allégé
 + Contrôle saisie utilisateur
++ Gestion de l'affichage des groupes identiques.
 
 ### RecursiveBotV3Web :
 
-+ RecursiveBot version Web
++ RecursiveBotV3 version Web
 
 

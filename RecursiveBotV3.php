@@ -91,17 +91,35 @@ function findLargerGroup() {
         checkDuplicate($i);
     }
     if($debugMode) echo 'nb de groupe au total : '.count($groupNum).PHP_EOL;
-    for($i = 0; $i < (count($groupNum));$i++)
+    $groupResult = $groupNum;
+    for($i = 0; $i < count($groupNum);$i++)
     {
-        if($debugMode) echo 'GroupNum testé index '.$i.PHP_EOL;
-        if(count($groupNum[$i]) > $total)
+        if($debugMode) echo 'TEST n°: '. $i.PHP_EOL;
+        if($total == 0 && $index == 0)
         {
-            $total = count($groupNum[$i]);
+            $total = count($groupResult[$i]);
+            $index = $i;
+        }
+        elseif($total > count($groupResult[$i]))
+        {
+            unset($groupResult[$i]);
+        }
+        elseif($total < count($groupResult[$i]))
+        {
+            unset($groupResult[$index]);
+            $total = count($groupResult[$i]);
             $index = $i;
         }
     }
-    echo 'Le tableau le plus grand est le n°'. ($index+1) . ' avec '. $total . ' Valeurs'.PHP_EOL;
-    echo 'Le tableau comprend ['. implode(',',$groupNum[$index]).']'.PHP_EOL;
+    $str = 'Résultats : '.'<br>';
+    if(count($groupResult) >= 1)
+    {
+        for($a = 0; $a < count($groupResult); $a++) {
+            $str .= '[Tableau n°'.($a+1).' avec '.$total. ' valeurs]'.PHP_EOL;
+        }
+        echo $str;
+    }
+    else echo 'Il n\'y a aucun 1, donc aucun tableau';
 }
 
 $file = fopen('php://stdin', 'r');
