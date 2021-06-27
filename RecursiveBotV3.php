@@ -110,7 +110,7 @@ function findLargerGroup() {
         }
     }
     echo 'Le tableau le plus grand est le n°'. ($index+1) . ' avec '. $total . ' Valeurs'.PHP_EOL;
-    echo 'Le tableau comprend ['. implode(',',$groupNum[$index]).']';
+    echo 'Le tableau comprend ['. implode(',',$groupNum[$index]).']'.PHP_EOL;
 }
 
 $file = fopen('php://stdin', 'r');
@@ -126,6 +126,9 @@ do {
     break;
 }while(1 != 2);
 $MAXVALUE = $width*$length;
+$time_start = microtime(true);
 findLargerGroup();
+$time_end = microtime(true);
+if($debugMode == 1) echo 'Temps d\'execution : '. ($time_end-$time_start);
 
 
