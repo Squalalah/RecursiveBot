@@ -9,11 +9,16 @@
 <hr>
  RecursiveBotV1 : 
 
-+ Première version fonctionnelle (sans choix utilisateur, largeur et longueur à 5 en permanence)
++ Première version fonctionnelle 
++ Sans choix utilisateur, largeur et longueur à 5 en permanence.
++ Les messages de debug apparaissent en permanence
++ Index de résultat non adapté à la lecture humaine (renvoit l'index tableau commencant à 0 au lieu de 1)
 
 RecursiveBotV2 :
 
 + Avec choix utilisateur, allant de 0 à infini.
++ Les messages de debug apparaissent si $debugMode = 1
++ Index de résultat renvoyant le n°Tableau à partir de 1 pour meilleur lecture humaine
 
 RecursiveBotV3 :
 
