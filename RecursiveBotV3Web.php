@@ -46,7 +46,7 @@ function findLargerGroup() : void {
     showResult($groupNum);
 }
 
-function checkDuplicate($index, $key = null, $parentIndex = null) {
+function checkDuplicate($index, $key = null, $parentIndex = null): ?array {
     global $tableau, $groupNum, $MAXVALUE, $MINVALUE, $width, $widthTabIncrement, $widthTabDecrement, $debugMode;
     $numbers = array();
     if($debugMode) {
@@ -100,6 +100,7 @@ function initTableau() {
         if($i % $width == 0) echo '<br>';
         echo $tableau['value'][$i];
     }
+    echo '<br>';
 }
 
 function showResult($groupNum) : void {
