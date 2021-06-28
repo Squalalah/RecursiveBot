@@ -69,7 +69,7 @@ function initTableau() : void {
     {
         $tableau['value'][] = rand(0,1);
         $tableau['check'][] = false;
-        if($i % $width == 0) echo PHP_EOL;
+        if($i % $width == 0) echo PHP_EOL; // retour à la ligne pour faire un carré/rectangle compréhensible vu la nature de l'algorithme.
         echo $tableau['value'][$i];
     }
     echo PHP_EOL;
