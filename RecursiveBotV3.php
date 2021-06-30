@@ -5,7 +5,7 @@ $groupNum = array();
 $widthTabIncrement = array();
 $widthTabDecrement = array();
 $MINVALUE = 0;
-$debugMode = 1;
+$debugMode = 0;
 
 function findLargerGroup() : void {
     global $tableau, $groupNum, $debugMode;
@@ -56,11 +56,11 @@ function checkDuplicate($index, $key = null, $parentIndex = null) : ?array {
 }
 
 function initTableau() : void {
-    global $tableau, $width, $length, $MINVALUE, $MAXVALUE, $widthTabIncrement, $widthTabDecrement;
+    global $tableau, $width, $length, $MINVALUE, $MAXVALUE, $widthTabIncrement, $widthTabDecrement, $debugMode;
     for($i = $width-1; $i < $width*$length; $i+=$width)
     {
         $widthTabIncrement[] = $i;
-        echo $i.PHP_EOL;
+        if($debugMode) echo $i.PHP_EOL;
     }
     for($i = 0; $i <= ($width*$length)-$width; $i +=$width) {
         $widthTabDecrement[] = $i;
